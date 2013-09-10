@@ -1,0 +1,124 @@
+\hypertarget{classcluster}{
+\section{cluster \-Class \-Reference}
+\label{classcluster}\index{cluster@{cluster}}
+}
+
+
+the basis class for storing clusters of degrees of freedom  
+
+
+
+
+{\ttfamily \#include $<$cluster.\-h$>$}
+
+\-Inheritance diagram for cluster\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.849873cm]{classcluster}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcluster_a32fd64e14f672a22f4ee58fe856f1626}{cluster} (unsigned k, unsigned l)
+\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classcluster_aa48a0f4aada61485263d76b82e819b4b}{isadm} (double eta2, \hyperlink{classcluster}{cluster} $\ast$cl, bl\-\_\-info \&info)=0
+\item 
+virtual void \hyperlink{classcluster_a7eb7a1209c0030e5cf344252f704fd57}{create\-Cluster\-Tree} (unsigned bmin, unsigned $\ast$op\-\_\-perm, unsigned $\ast$po\-\_\-perm)=0
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcluster_ab4f61cd101a28c78d62deba9ebcd1a88}{
+unsigned \hyperlink{classcluster_ab4f61cd101a28c78d62deba9ebcd1a88}{nbeg}}
+\label{classcluster_ab4f61cd101a28c78d62deba9ebcd1a88}
+
+\begin{DoxyCompactList}\small\item\em beginning and ending index (beginning index of next) \end{DoxyCompactList}\item 
+\hypertarget{classcluster_a5351798cb6e92485a7e1b87d9b566546}{
+unsigned \hyperlink{classcluster_a5351798cb6e92485a7e1b87d9b566546}{nsons}}
+\label{classcluster_a5351798cb6e92485a7e1b87d9b566546}
+
+\begin{DoxyCompactList}\small\item\em number of sons, nsons==0 if this is a leaf \end{DoxyCompactList}\item 
+\hypertarget{classcluster_a8dae9741438a6597431995db720908db}{
+\hyperlink{classcluster}{cluster} $\ast$$\ast$ \hyperlink{classcluster_a8dae9741438a6597431995db720908db}{sons}}
+\label{classcluster_a8dae9741438a6597431995db720908db}
+
+\begin{DoxyCompactList}\small\item\em the array of sons of this cluster in the cluster tree \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+the basis class for storing clusters of degrees of freedom 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classcluster_a32fd64e14f672a22f4ee58fe856f1626}{
+\index{cluster@{cluster}!cluster@{cluster}}
+\index{cluster@{cluster}!cluster@{cluster}}
+\subsubsection[{cluster}]{\setlength{\rightskip}{0pt plus 5cm}cluster\-::cluster (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k, }
+\item[{unsigned}]{l}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classcluster_a32fd64e14f672a22f4ee58fe856f1626}
+
+
+\-Constructor. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em k} & beginning index of the cluster \\
+\hline
+{\em l} & beginning index of the next cluster \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcluster_a7eb7a1209c0030e5cf344252f704fd57}{
+\index{cluster@{cluster}!create\-Cluster\-Tree@{create\-Cluster\-Tree}}
+\index{create\-Cluster\-Tree@{create\-Cluster\-Tree}!cluster@{cluster}}
+\subsubsection[{create\-Cluster\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}virtual void cluster\-::create\-Cluster\-Tree (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{bmin, }
+\item[{unsigned $\ast$}]{op\-\_\-perm, }
+\item[{unsigned $\ast$}]{po\-\_\-perm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classcluster_a7eb7a1209c0030e5cf344252f704fd57}
+creates recursively the cluster tree, i.\-e. changes the permutation op\-\_\-perm and po\-\_\-perm and create child cluster trees 
+\begin{DoxyParams}{\-Parameters}
+{\em op\-\_\-perm} & permutation\-: permutated\-\_\-row = op\-\_\-perm\mbox{[}original\-\_\-row\mbox{]} \\
+\hline
+{\em po\-\_\-perm} & reverse permutation\-: original\-\_\-row = po\-\_\-perm\mbox{[}permutated\-\_\-idx\mbox{]} \\
+\hline
+{\em bmin} & threshold value for stopping further refinement \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in \hyperlink{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}{cluster\-\_\-pca$<$ T $>$}, \hyperlink{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}{cluster\-\_\-pca$<$ T1 $>$}, \hyperlink{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}{cluster\-\_\-pca$<$ T2 $>$}, \hyperlink{classClusterAlg_acbbefef10e2d91713a567af5bb5c08f7}{\-Cluster\-Alg}, \hyperlink{classcluster__bbx_afa9ff45f3792189e25a46b8764f2da0c}{cluster\-\_\-bbx$<$ T $>$}, and \hyperlink{classcluster__alg_a2464aa83e8604d2098870c461f93b013}{cluster\-\_\-alg}.
+
+
+
+\-Referenced by cluster\-\_\-bbx$<$ T $>$\-::create\-Cluster\-Tree(), and cluster\-\_\-pca$<$ T2 $>$\-::create\-Cluster\-Tree().
+
+\hypertarget{classcluster_aa48a0f4aada61485263d76b82e819b4b}{
+\index{cluster@{cluster}!isadm@{isadm}}
+\index{isadm@{isadm}!cluster@{cluster}}
+\subsubsection[{isadm}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool cluster\-::isadm (
+\begin{DoxyParamCaption}
+\item[{double}]{eta2, }
+\item[{{\bf cluster} $\ast$}]{cl, }
+\item[{bl\-\_\-info \&}]{info}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classcluster_aa48a0f4aada61485263d76b82e819b4b}
+is this cluster admissible with the cluster cl ? bool\& only valid for cluster\-Sp\-N\-D 
+
+\-Implemented in \hyperlink{classcluster3d__bbx_a435d59e2b633d01a2748b7353168796e}{cluster3d\-\_\-bbx$<$ T $>$}, \hyperlink{classcluster2d__bbx_a0c0e1d9841ed93b2a59b241fc68135e6}{cluster2d\-\_\-bbx$<$ T $>$}, \hyperlink{classClusterAlg_a3daa14e294fe03b1405d057de3a640be}{\-Cluster\-Alg}, \hyperlink{classcluster1d__bbx_afbdd020333c05115e04969bef28db2cf}{cluster1d\-\_\-bbx$<$ T $>$}, \hyperlink{classcluster__alg_ae3c32452aca9733c237f0c23dc8f95e6}{cluster\-\_\-alg}, \hyperlink{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}{cluster\-\_\-pca$<$ T $>$}, \hyperlink{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}{cluster\-\_\-pca$<$ T1 $>$}, \hyperlink{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}{cluster\-\_\-pca$<$ T2 $>$}, and \hyperlink{classcluster__bbx_ab5852c7c8fb33c1b3a681c8f4b0eec10}{cluster\-\_\-bbx$<$ T $>$}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cluster_8h}{cluster.\-h}\end{DoxyCompactItemize}

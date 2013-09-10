@@ -1,0 +1,66 @@
+ 
+               Another software library on Hierarchical Matrices
+                  for Elliptic Differential equations (AHMED)
+
+                               by M. Bebendorf
+
+This C++ software library implements the structure of hierarchical matrices
+for the efficient treatment of discrete solution operators for elliptic
+boundary value problems.
+
+
+Requirements for compiling AHMED
+--------------------------------
+a. C/C++ compiler
+Recent C and C++ compilers supporting OpenMP directives are required.
+We recommend using the Intel compilers.
+
+b. BLAS/LAPACK
+Time-critical components of AHMED are based on BLAS and LAPACK
+(see http://www.netlib.org/LAPACK). We recommend Intel's Math
+Kernel Library (MKL) or GOTO BLAS.
+
+c. METIS
+Some parts of the library require George Karypis' graph partitioning
+software METIS. It is included in many linux distributions.
+Alternatively, you can obtain it from 
+
+      http://glaros.dtc.umn.edu/gkhome/metis/metis/overview
+
+d. MPI
+Parallelization in AHMED is based on the Message Passing Interface (MPI).
+You need a recent implementation (OpenMPI, MPICH2) unless you want only the
+sequential version of AHMED.
+
+
+
+Compiling the library
+---------------------
+a. The configuration of AHMED can be done via cmake. Execute
+
+      mkdir build
+      cd build
+      CC=<path to C compiler> CXX=<path to C++ compiler> cmake ..
+
+   Appending '-DENABLE_MPI=1' to the previous command activates the parallel
+   parts of the library. For further options use the ncurses interface via
+   executing "ccmake ..".
+
+c. Compile AHMED by calling
+ 
+     make
+
+
+Documentation
+-------------
+The sources are partially documented using the documentation system 'doxygen';
+see http://doxygen.sf.net for further information on doxygen. The results of
+doxygen can be found in the Doc/ directory. Some examples on how to use the
+library can be found in the Examples/ directory.
+
+
+Further information
+-------------------
+Further information can be obtained from the web site
+
+      http://bebendorf.ins.uni-bonn.de/AHMED.html

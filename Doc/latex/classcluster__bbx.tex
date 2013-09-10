@@ -1,0 +1,86 @@
+\hypertarget{classcluster__bbx}{
+\section{cluster\-\_\-bbx$<$ \-T $>$ \-Class \-Template \-Reference}
+\label{classcluster__bbx}\index{cluster\-\_\-bbx$<$ T $>$@{cluster\-\_\-bbx$<$ T $>$}}
+}
+
+
+\-A class for storing clusters of degrees of freedom. \-Subdivision is based on bounding boxes (bbx)  
+
+
+
+
+{\ttfamily \#include $<$cluster\-\_\-bbx.\-h$>$}
+
+\-Inheritance diagram for cluster\-\_\-bbx$<$ \-T $>$\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classcluster__bbx}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classcluster__bbx_ab5852c7c8fb33c1b3a681c8f4b0eec10}{isadm} (double eta, \hyperlink{classcluster}{cluster} $\ast$cl, bl\-\_\-info \&info)=0
+\item 
+virtual void \hyperlink{classcluster__bbx_afa9ff45f3792189e25a46b8764f2da0c}{create\-Cluster\-Tree} (unsigned bmin, unsigned $\ast$op\-\_\-perm, unsigned $\ast$po\-\_\-perm)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$class \-T$>$class cluster\-\_\-bbx$<$ T $>$}
+
+\-A class for storing clusters of degrees of freedom. \-Subdivision is based on bounding boxes (bbx) 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcluster__bbx_afa9ff45f3792189e25a46b8764f2da0c}{
+\index{cluster\-\_\-bbx@{cluster\-\_\-bbx}!create\-Cluster\-Tree@{create\-Cluster\-Tree}}
+\index{create\-Cluster\-Tree@{create\-Cluster\-Tree}!cluster_bbx@{cluster\-\_\-bbx}}
+\subsubsection[{create\-Cluster\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class \-T$>$ virtual void {\bf cluster\-\_\-bbx}$<$ \-T $>$\-::create\-Cluster\-Tree (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{bmin, }
+\item[{unsigned $\ast$}]{op\-\_\-perm, }
+\item[{unsigned $\ast$}]{po\-\_\-perm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{classcluster__bbx_afa9ff45f3792189e25a46b8764f2da0c}
+creates recursively the cluster tree, i.\-e. changes the permutation op\-\_\-perm and po\-\_\-perm and create child cluster trees 
+\begin{DoxyParams}{\-Parameters}
+{\em op\-\_\-perm} & permutation\-: permutated\-\_\-row = op\-\_\-perm\mbox{[}original\-\_\-row\mbox{]} \\
+\hline
+{\em po\-\_\-perm} & reverse permutation\-: original\-\_\-row = po\-\_\-perm\mbox{[}permutated\-\_\-idx\mbox{]} \\
+\hline
+{\em bmin} & threshold value for stopping further refinement \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classcluster_a7eb7a1209c0030e5cf344252f704fd57}{cluster}.
+
+
+
+\-References cluster\-::create\-Cluster\-Tree(), and cluster\-::nbeg.
+
+\hypertarget{classcluster__bbx_ab5852c7c8fb33c1b3a681c8f4b0eec10}{
+\index{cluster\-\_\-bbx@{cluster\-\_\-bbx}!isadm@{isadm}}
+\index{isadm@{isadm}!cluster_bbx@{cluster\-\_\-bbx}}
+\subsubsection[{isadm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class \-T$>$ virtual bool {\bf cluster\-\_\-bbx}$<$ \-T $>$\-::isadm (
+\begin{DoxyParamCaption}
+\item[{double}]{eta2, }
+\item[{{\bf cluster} $\ast$}]{cl, }
+\item[{bl\-\_\-info \&}]{info}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classcluster__bbx_ab5852c7c8fb33c1b3a681c8f4b0eec10}
+is this cluster admissible with the cluster cl ? bool\& only valid for cluster\-Sp\-N\-D 
+
+\-Implements \hyperlink{classcluster_aa48a0f4aada61485263d76b82e819b4b}{cluster}.
+
+
+
+\-Implemented in \hyperlink{classcluster3d__bbx_a435d59e2b633d01a2748b7353168796e}{cluster3d\-\_\-bbx$<$ T $>$}, \hyperlink{classcluster2d__bbx_a0c0e1d9841ed93b2a59b241fc68135e6}{cluster2d\-\_\-bbx$<$ T $>$}, and \hyperlink{classcluster1d__bbx_afbdd020333c05115e04969bef28db2cf}{cluster1d\-\_\-bbx$<$ T $>$}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+cluster\-\_\-bbx.\-h\end{DoxyCompactItemize}

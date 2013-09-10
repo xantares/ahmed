@@ -1,0 +1,196 @@
+\hypertarget{classblcluster}{
+\section{blcluster \-Class \-Reference}
+\label{classblcluster}\index{blcluster@{blcluster}}
+}
+
+
+in this class the block structure of the \-H-\/matrix is stored  
+
+
+
+
+{\ttfamily \#include $<$blcluster.\-h$>$}
+
+
+
+\-Inherited by blcluster\-\_\-geo, and blcluster\-\_\-ref.
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classblcluster_ac0b8f76057e8ccfdf85ba6f0bcb22365}{
+\hyperlink{classblcluster_ac0b8f76057e8ccfdf85ba6f0bcb22365}{blcluster} ()}
+\label{classblcluster_ac0b8f76057e8ccfdf85ba6f0bcb22365}
+
+\begin{DoxyCompactList}\small\item\em empty constructor \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a5df550b7bb77a1ac0aae2ac6e83d9fa3}{
+\hyperlink{classblcluster_a5df550b7bb77a1ac0aae2ac6e83d9fa3}{blcluster} (\hyperlink{classcluster}{cluster} $\ast$cl1, \hyperlink{classcluster}{cluster} $\ast$cl2)}
+\label{classblcluster_a5df550b7bb77a1ac0aae2ac6e83d9fa3}
+
+\begin{DoxyCompactList}\small\item\em another constructor \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_abc6f2ee7f3bbb0f9fa41e25ca2fda8d3}{
+\hyperlink{classblcluster_abc6f2ee7f3bbb0f9fa41e25ca2fda8d3}{blcluster} (\hyperlink{classblcluster}{blcluster} $\ast$bl)}
+\label{classblcluster_abc6f2ee7f3bbb0f9fa41e25ca2fda8d3}
+
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a9547f6c9acfbf03afc4096c0698e9bd9}{
+virtual \hyperlink{classblcluster_a9547f6c9acfbf03afc4096c0698e9bd9}{$\sim$blcluster} ()}
+\label{classblcluster_a9547f6c9acfbf03afc4096c0698e9bd9}
+
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a5fa2afacae44e201697174a6a1ed2f10}{
+void \hyperlink{classblcluster_a5fa2afacae44e201697174a6a1ed2f10}{setsons} (unsigned \hyperlink{classblcluster_ac3f85b495bb2fdee9978e20d2748c700}{n1}, unsigned n2, \hyperlink{classblcluster}{blcluster} $\ast$$\ast$p)}
+\label{classblcluster_a5fa2afacae44e201697174a6a1ed2f10}
+
+\begin{DoxyCompactList}\small\item\em set the sons \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_ab644565da42f5fa1d9310e2a5151760b}{
+unsigned \hyperlink{classblcluster_ab644565da42f5fa1d9310e2a5151760b}{getb1} () const }
+\label{classblcluster_ab644565da42f5fa1d9310e2a5151760b}
+
+\begin{DoxyCompactList}\small\item\em the row index of the first entry of this block within the \-H-\/matrix \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a219be9487e16260d3ccae811e8d1680c}{
+unsigned \hyperlink{classblcluster_a219be9487e16260d3ccae811e8d1680c}{getb2} () const }
+\label{classblcluster_a219be9487e16260d3ccae811e8d1680c}
+
+\begin{DoxyCompactList}\small\item\em the column index of the first entry of this block within the \-H-\/matrix \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a9d0cb05a309f5f62153b2fd70cdfa15b}{
+unsigned \hyperlink{classblcluster_a9d0cb05a309f5f62153b2fd70cdfa15b}{getn1} () const }
+\label{classblcluster_a9d0cb05a309f5f62153b2fd70cdfa15b}
+
+\begin{DoxyCompactList}\small\item\em the number of rows of this block \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a855a545c85d1d57cf5e4625ca00545fe}{
+unsigned \hyperlink{classblcluster_a855a545c85d1d57cf5e4625ca00545fe}{getn2} () const }
+\label{classblcluster_a855a545c85d1d57cf5e4625ca00545fe}
+
+\begin{DoxyCompactList}\small\item\em the number of columns of this block \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_ae76ce05ef24c720dcc504da61a70dbaf}{
+bool \hyperlink{classblcluster_ae76ce05ef24c720dcc504da61a70dbaf}{isadm} () const }
+\label{classblcluster_ae76ce05ef24c720dcc504da61a70dbaf}
+
+\begin{DoxyCompactList}\small\item\em is this block admissible ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a5005ca5e51e9e96db991f2385dc41ba1}{
+bool \hyperlink{classblcluster_a5005ca5e51e9e96db991f2385dc41ba1}{issep} () const }
+\label{classblcluster_a5005ca5e51e9e96db991f2385dc41ba1}
+
+\begin{DoxyCompactList}\small\item\em are the clusters of this separated ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a81408285d89c4fdba1cc8699af07f1b7}{
+bool \hyperlink{classblcluster_a81408285d89c4fdba1cc8699af07f1b7}{isnleaf} () const }
+\label{classblcluster_a81408285d89c4fdba1cc8699af07f1b7}
+
+\begin{DoxyCompactList}\small\item\em is this a leaf ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_aceb1254c4eb04565f92dc7ecd5fc2fd5}{
+unsigned \hyperlink{classblcluster_aceb1254c4eb04565f92dc7ecd5fc2fd5}{getnrs} () const }
+\label{classblcluster_aceb1254c4eb04565f92dc7ecd5fc2fd5}
+
+\begin{DoxyCompactList}\small\item\em number of row sons \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_affdff368ac4b872e0de2bd21f303b7d6}{
+unsigned \hyperlink{classblcluster_affdff368ac4b872e0de2bd21f303b7d6}{getncs} () const }
+\label{classblcluster_affdff368ac4b872e0de2bd21f303b7d6}
+
+\begin{DoxyCompactList}\small\item\em number of column sons \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a97cda7274881347331b748820a961c66}{
+unsigned \hyperlink{classblcluster_a97cda7274881347331b748820a961c66}{getns} () const }
+\label{classblcluster_a97cda7274881347331b748820a961c66}
+
+\begin{DoxyCompactList}\small\item\em number of sons \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a9cf08bb6595cc2af791deb17f65d1325}{
+bool \hyperlink{classblcluster_a9cf08bb6595cc2af791deb17f65d1325}{isdbl} () const }
+\label{classblcluster_a9cf08bb6595cc2af791deb17f65d1325}
+
+\begin{DoxyCompactList}\small\item\em is this a diagonal block ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_ab5f2ff400dcb895052706a4ff13fc3f9}{
+unsigned long \hyperlink{classblcluster_ab5f2ff400dcb895052706a4ff13fc3f9}{size} () const }
+\label{classblcluster_ab5f2ff400dcb895052706a4ff13fc3f9}
+
+\begin{DoxyCompactList}\small\item\em returns the size of the block cluster tree starting from this \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a1394e38612e10a4df82d4eeb185a28d2}{
+unsigned long \hyperlink{classblcluster_a1394e38612e10a4df82d4eeb185a28d2}{nleaves} () const }
+\label{classblcluster_a1394e38612e10a4df82d4eeb185a28d2}
+
+\begin{DoxyCompactList}\small\item\em returns the number of leaves in the block cluster tree starting from this \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_adf139d0dc5e5b670183e75af4e3096b3}{
+unsigned long \hyperlink{classblcluster_adf139d0dc5e5b670183e75af4e3096b3}{nupleaves} () const }
+\label{classblcluster_adf139d0dc5e5b670183e75af4e3096b3}
+
+\begin{DoxyCompactList}\small\item\em returns the number of leaves in the upper triangular part \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_aa2915951b92c5b88a366e7bf92121ec5}{
+unsigned long \hyperlink{classblcluster_aa2915951b92c5b88a366e7bf92121ec5}{nlwleaves} () const }
+\label{classblcluster_aa2915951b92c5b88a366e7bf92121ec5}
+
+\begin{DoxyCompactList}\small\item\em returns the number of leaves in the upper triangular part \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_aa68c3795dbc33734c55cc9137c4decc3}{
+unsigned long \hyperlink{classblcluster_aa68c3795dbc33734c55cc9137c4decc3}{ndbls} () const }
+\label{classblcluster_aa68c3795dbc33734c55cc9137c4decc3}
+
+\begin{DoxyCompactList}\small\item\em returns the number of leaves on the block diagonal (i.\-e. b1==b2) \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a41d823be1619b8ed38539314ec35bac5}{
+bool \hyperlink{classblcluster_a41d823be1619b8ed38539314ec35bac5}{is\-Lr\-M} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_a41d823be1619b8ed38539314ec35bac5}
+
+\begin{DoxyCompactList}\small\item\em is the corresponding block in \-A stored as a low-\/rank matrix ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a4b359db7358c361e1ec5fc7f8bed20b1}{
+bool \hyperlink{classblcluster_a4b359db7358c361e1ec5fc7f8bed20b1}{is\-Ge\-M} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_a4b359db7358c361e1ec5fc7f8bed20b1}
+
+\begin{DoxyCompactList}\small\item\em is the corresponding block in \-A stored as a dense matrix ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_ae1afe52fd8bae23b6e15b3ed44b4da85}{
+bool \hyperlink{classblcluster_ae1afe52fd8bae23b6e15b3ed44b4da85}{is\-Lt\-M} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_ae1afe52fd8bae23b6e15b3ed44b4da85}
+
+\begin{DoxyCompactList}\small\item\em is the corresponding block in \-A stored as a lower triangular matrix ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a6a971b2f295e5e6da5d3b2e9796c5ba4}{
+bool \hyperlink{classblcluster_a6a971b2f295e5e6da5d3b2e9796c5ba4}{is\-Ut\-M} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_a6a971b2f295e5e6da5d3b2e9796c5ba4}
+
+\begin{DoxyCompactList}\small\item\em is the corresponding block in \-A stored as a upper triangular matrix ? \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a98a2a2481a61f1a0512a26f7b927453e}{
+unsigned \hyperlink{classblcluster_a98a2a2481a61f1a0512a26f7b927453e}{rank} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_a98a2a2481a61f1a0512a26f7b927453e}
+
+\begin{DoxyCompactList}\small\item\em returns the rank of the corresponding block in \-A \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_ad4b1910a034cd61a7da077881bae1e87}{
+double $\ast$ \hyperlink{classblcluster_ad4b1910a034cd61a7da077881bae1e87}{data} (mblock$<$ double $>$ $\ast$$\ast$const \-A) const }
+\label{classblcluster_ad4b1910a034cd61a7da077881bae1e87}
+
+\begin{DoxyCompactList}\small\item\em returns the pointer to the data of the corresponding block in \-A \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classblcluster_ac3f85b495bb2fdee9978e20d2748c700}{
+unsigned \hyperlink{classblcluster_ac3f85b495bb2fdee9978e20d2748c700}{n1}}
+\label{classblcluster_ac3f85b495bb2fdee9978e20d2748c700}
+
+\begin{DoxyCompactList}\small\item\em dimensions of this block \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a54e11b9ceda6f24ae849877cdd6eac1b}{
+unsigned \hyperlink{classblcluster_a54e11b9ceda6f24ae849877cdd6eac1b}{b1}}
+\label{classblcluster_a54e11b9ceda6f24ae849877cdd6eac1b}
+
+\begin{DoxyCompactList}\small\item\em position in global matrix (inidices of first row/column) \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_aa0f7b83b2958cb8879be9d17336031c9}{
+unsigned \hyperlink{classblcluster_aa0f7b83b2958cb8879be9d17336031c9}{ns1}}
+\label{classblcluster_aa0f7b83b2958cb8879be9d17336031c9}
+
+\begin{DoxyCompactList}\small\item\em number of row and column sons \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a25d49fbc00a4587a6fd302b220e98d50}{
+\hyperlink{classblcluster}{blcluster} $\ast$$\ast$ \hyperlink{classblcluster_a25d49fbc00a4587a6fd302b220e98d50}{sons}}
+\label{classblcluster_a25d49fbc00a4587a6fd302b220e98d50}
+
+\begin{DoxyCompactList}\small\item\em the sons of this block cluster \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a9ae8d87617d4bb44ba2c46c9384844af}{
+unsigned \hyperlink{classblcluster_a9ae8d87617d4bb44ba2c46c9384844af}{idx}}
+\label{classblcluster_a9ae8d87617d4bb44ba2c46c9384844af}
+
+\begin{DoxyCompactList}\small\item\em the index of this block, valid only if this block is a leaf \end{DoxyCompactList}\item 
+\hypertarget{classblcluster_a8051919e51415a68844e11e18480e5a8}{
+bl\-\_\-info \hyperlink{classblcluster_a8051919e51415a68844e11e18480e5a8}{info}}
+\label{classblcluster_a8051919e51415a68844e11e18480e5a8}
+
+\begin{DoxyCompactList}\small\item\em properties of this block \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+in this class the block structure of the \-H-\/matrix is stored 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{blcluster_8h}{blcluster.\-h}\end{DoxyCompactItemize}

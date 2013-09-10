@@ -1,0 +1,6 @@
+AHMED non-commercial release
+
+Release history:
+
+version 1.0: June 11, 2012
+initial release

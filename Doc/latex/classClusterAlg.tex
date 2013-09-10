@@ -1,0 +1,557 @@
+\hypertarget{classClusterAlg}{
+\section{\-Cluster\-Alg \-Class \-Reference}
+\label{classClusterAlg}\index{\-Cluster\-Alg@{\-Cluster\-Alg}}
+}
+
+
+\-Base class for storing clusters of degrees of freedom without geometric information.  
+
+
+
+
+{\ttfamily \#include $<$\-Cluster\-Alg.\-h$>$}
+
+\-Inheritance diagram for \-Cluster\-Alg\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classClusterAlg}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClusterAlg_a5637ecc2686cb0d43965470218e84863}{\-Cluster\-Alg} (unsigned n, unsigned $\ast$i\-A, unsigned $\ast$j\-A)
+\item 
+\hyperlink{classClusterAlg_a7cf98bcd418f6afdc30b7c7457722851}{\-Cluster\-Alg} (\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$father, unsigned beg, unsigned end, unsigned $\ast$\hyperlink{classClusterAlg_a4f06e1465978072d8c6bd098e062b701}{op\-\_\-perm}, unsigned $\ast$\hyperlink{classClusterAlg_af3d1d7c4ae0516ff9de725d3ff760b07}{po\-\_\-perm}, unsigned \hyperlink{classClusterAlg_ac06ccb0ba85be10e97392bd063fa78c8}{depth}, \-Adj\-Mat $\ast$global\-\_\-mat, \-Adj\-Mat $\ast$local\-\_\-mat)
+\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classClusterAlg_aa6496a6fbd35f3f230b9550778cb49c1}{
+virtual \hyperlink{classClusterAlg_aa6496a6fbd35f3f230b9550778cb49c1}{$\sim$\-Cluster\-Alg} ()}
+\label{classClusterAlg_aa6496a6fbd35f3f230b9550778cb49c1}
+
+\begin{DoxyCompactList}\small\item\em \-Destructor. \-Destructor frees all form the objects allocated memory. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classClusterAlg_ab2615e5ba68257b11d477274737a9c52}{subdivide} (unsigned bmin)=0
+\begin{DoxyCompactList}\small\item\em subdivide this cluster recursively, needed to generate the cluster tree \end{DoxyCompactList}\item 
+virtual void \hyperlink{classClusterAlg_acbbefef10e2d91713a567af5bb5c08f7}{create\-Cluster\-Tree} (unsigned bmin, unsigned $\ast$\hyperlink{classClusterAlg_a4f06e1465978072d8c6bd098e062b701}{op\-\_\-perm}, unsigned $\ast$\hyperlink{classClusterAlg_af3d1d7c4ae0516ff9de725d3ff760b07}{po\-\_\-perm})
+\item 
+virtual void \hyperlink{classClusterAlg_a3da066d722da219e5f64f624a6121b05}{compute\-Neighbor} ()=0
+\item 
+unsigned \hyperlink{classClusterAlg_adce4fbafed2d9226336d3b57fae89692}{is\-Neighbour} (\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$const other, unsigned \&nnodes0, unsigned \&nnodes1) const 
+\begin{DoxyCompactList}\small\item\em method checks if there exists edges in $(i, j) \in E(G(A))$ with $i$ in this cluster and $j$ in cluster other. \end{DoxyCompactList}\item 
+void \hyperlink{classClusterAlg_ac7175d7df8045c8ad4363f709b5cc6cd}{neighbors\-To\-Array} ()
+\item 
+const std\-::list$<$ \-Neighbor $>$ \& \hyperlink{classClusterAlg_a468cf8819a9bae6a6b65db3ad6fb2d2d}{get\-Neighbor} () const 
+\begin{DoxyCompactList}\small\item\em \-Method returns the list of \-Cluster\-Alg$\ast$ that are in the neighborhood of the actual \hyperlink{classClusterAlg}{\-Cluster\-Alg}. \end{DoxyCompactList}\item 
+void \hyperlink{classClusterAlg_a3ce04d40392ab7e8143de5ffcaea6dda}{add\-Neighbor\-Element} (\-Neighbor b)
+\item 
+\hypertarget{classClusterAlg_a3daa14e294fe03b1405d057de3a640be}{
+virtual bool \hyperlink{classClusterAlg_a3daa14e294fe03b1405d057de3a640be}{isadm} (double eta2, \hyperlink{classcluster}{cluster} $\ast$cl, bl\-\_\-info \&info)=0}
+\label{classClusterAlg_a3daa14e294fe03b1405d057de3a640be}
+
+\begin{DoxyCompactList}\small\item\em \-This method checks the admissibility of cluster this with the cluster cl. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classClusterAlg_abe3332e66bad89111412fb0fa7928c66}{is\-Separator} () const =0
+\item 
+unsigned \hyperlink{classClusterAlg_ac21ad0586cca3b05c1df94fa66f224e4}{get\-Depth} () const 
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$ \hyperlink{classClusterAlg_a7b3c0f12a96e20016135ae5b98c100db}{get\-Parent} () const 
+\begin{DoxyCompactList}\small\item\em \-Method returns the pointer to the parent cluster. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classClusterAlg_a1010355ccb56db6bc68b258e94c4a765}{has\-Neighbour} (\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$const other) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions -\/ \-Graph related methods for}
+\label{_amgrpd43883f7a3f1c1aa575f47a69a7c8e7b}%
+ admissibility checking
+
+\-The following methods base on graph-\/methods. \-The graph is generated with construct\-Graph from nodes consisting of cluster-\/tree-\/entities and edges between clusters if they are neighbored. \begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$ \hyperlink{classClusterAlg_a1b63bc64e4622216b0539c4a5b76d3c2}{parent}
+\item 
+unsigned $\ast$ \hyperlink{classClusterAlg_a4f06e1465978072d8c6bd098e062b701}{op\-\_\-perm}
+\item 
+unsigned $\ast$ \hyperlink{classClusterAlg_af3d1d7c4ae0516ff9de725d3ff760b07}{po\-\_\-perm}
+\item 
+unsigned $\ast$ \hyperlink{classClusterAlg_a25fe84e1434812f52a484e14dc191a01}{\-\_\-l\-\_\-op\-\_\-perm}
+\item 
+unsigned $\ast$ \hyperlink{classClusterAlg_ae5aac25ca0791e244b25574814b18825}{\-\_\-l\-\_\-po\-\_\-perm}
+\item 
+unsigned \hyperlink{classClusterAlg_a38f91e914760de5e80a8023e5bb644bf}{diam}
+\item 
+unsigned \hyperlink{classClusterAlg_ac06ccb0ba85be10e97392bd063fa78c8}{depth}
+\item 
+\-Adj\-Mat $\ast$ \hyperlink{classClusterAlg_a29eb1ed447fe956fbece857e0ab898bc}{adj\-\_\-mat}
+\item 
+\-Adj\-Mat $\ast$ \hyperlink{classClusterAlg_aa7d43b82eac4084710cabafe6c9d8fee}{\-\_\-local\-\_\-adj\-\_\-mat}
+\item 
+std\-::list$<$ \-Neighbor $>$ \hyperlink{classClusterAlg_ace012e3a54a91c88fb486b7e02394d39}{list\-\_\-boundary}
+\item 
+\-Neighbor $\ast$ \hyperlink{classClusterAlg_a09156a9cf7570cde252131f25e599fbb}{neighbors}
+\item 
+unsigned \hyperlink{classClusterAlg_af1b22f77639a805d28569806d561600e}{nneighbors}
+\item 
+unsigned \hyperlink{classClusterAlg_ac1034ff983ce968e11edaf18c2b15cb2}{vdepth}
+\item 
+\-M\-Graph$<$ \hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$, unsigned $>$ $\ast$ \hyperlink{classClusterAlg_ad3a53cf9fb7af4e2a45e7d859bc87c7b}{construct\-Graph} (\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$t\-\_\-2, unsigned up=0)
+\begin{DoxyCompactList}\small\item\em \-Method computes an estimation of the distance between the cluster represented by this object and the cluster other based on graphs for the admissibility check. \end{DoxyCompactList}\item 
+void \hyperlink{classClusterAlg_a108b12bb473f429c897e7ba004dd8b62}{find\-Roots} (\hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$\&p\-\_\-0, \hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$\&p\-\_\-1) const 
+\begin{DoxyCompactList}\small\item\em \-Method find\-Roots returns first neighbored pair of predecessors in the cluster tree. \end{DoxyCompactList}\item 
+void \hyperlink{classClusterAlg_ab4050fdfb42dc0ebec40c7464bbaf4ab}{get\-Nodes} (unsigned level, std\-::list$<$ \hyperlink{classClusterAlg}{\-Cluster\-Alg} $\ast$ $>$ \&nodes)
+\begin{DoxyCompactList}\small\item\em \-Method traverses recursively the cluster-\/tree until a given level. \-If this level is achieved the pointer to this cluster is inserted into the list. \end{DoxyCompactList}\item 
+\hypertarget{classClusterAlg_aa2c3643c9a48e40c8adb7acbd3011ec5}{
+unsigned \hyperlink{classClusterAlg_aa2c3643c9a48e40c8adb7acbd3011ec5}{get\-Diam} () const }
+\label{classClusterAlg_aa2c3643c9a48e40c8adb7acbd3011ec5}
+
+\begin{DoxyCompactList}\small\item\em method returns an estimation of the diameter of the cluster. for the estimation holds\-: radius of graph $<$= estimated diam $<$= diameter of graph the value is computed in the constructor \end{DoxyCompactList}\item 
+\hypertarget{classClusterAlg_abef00c7a121ff7af20898688e2a2d3db}{
+void {\bfseries set\-Diam} (unsigned d)}
+\label{classClusterAlg_abef00c7a121ff7af20898688e2a2d3db}
+
+\item 
+\hypertarget{classClusterAlg_ac25fcff58a42fd7703320154a7fa237b}{
+unsigned {\bfseries get\-Virtual\-Depth} () const }
+\label{classClusterAlg_ac25fcff58a42fd7703320154a7fa237b}
+
+\item 
+\hypertarget{classClusterAlg_ad04c66e0c57ef73831a87ce6b5e98d96}{
+void {\bfseries set\-Virtual\-Depth} (unsigned vd)}
+\label{classClusterAlg_ad04c66e0c57ef73831a87ce6b5e98d96}
+
+\item 
+\hypertarget{classClusterAlg_ad1b8fae8a667f970373e9d20b99e335e}{
+virtual void {\bfseries refine} (unsigned max\-\_\-level)=0}
+\label{classClusterAlg_ad1b8fae8a667f970373e9d20b99e335e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Base class for storing clusters of degrees of freedom without geometric information. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classClusterAlg_a5637ecc2686cb0d43965470218e84863}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!\-Cluster\-Alg@{\-Cluster\-Alg}}
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{\-Cluster\-Alg}]{\setlength{\rightskip}{0pt plus 5cm}\-Cluster\-Alg\-::\-Cluster\-Alg (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{n, }
+\item[{unsigned $\ast$}]{i\-A, }
+\item[{unsigned $\ast$}]{j\-A}
+\end{DoxyParamCaption}
+)}}
+\label{classClusterAlg_a5637ecc2686cb0d43965470218e84863}
+\-Constructor creates the root of the cluster tree 
+\begin{DoxyParams}{\-Parameters}
+{\em n} & \\
+\hline
+{\em i\-A} & \\
+\hline
+{\em j\-A} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+
+\end{DoxyReturn}
+\hypertarget{classClusterAlg_a7cf98bcd418f6afdc30b7c7457722851}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!\-Cluster\-Alg@{\-Cluster\-Alg}}
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{\-Cluster\-Alg}]{\setlength{\rightskip}{0pt plus 5cm}\-Cluster\-Alg\-::\-Cluster\-Alg (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Cluster\-Alg} $\ast$}]{father, }
+\item[{unsigned}]{beg, }
+\item[{unsigned}]{end, }
+\item[{unsigned $\ast$}]{op\-\_\-perm, }
+\item[{unsigned $\ast$}]{po\-\_\-perm, }
+\item[{unsigned}]{depth, }
+\item[{\-Adj\-Mat $\ast$}]{global\-\_\-mat, }
+\item[{\-Adj\-Mat $\ast$}]{local\-\_\-mat}
+\end{DoxyParamCaption}
+)}}
+\label{classClusterAlg_a7cf98bcd418f6afdc30b7c7457722851}
+
+
+\-Constructor. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em father} & parent node in cluster tree \\
+\hline
+{\em beg} & beginning index of the cluster (see class \-D\-O\-F\-Point) \\
+\hline
+{\em end} & beginning index of the next cluster (see class \-D\-O\-F\-Point) \\
+\hline
+{\em op\-\_\-perm} & \\
+\hline
+{\em po\-\_\-perm} & \\
+\hline
+{\em depth} & distance between this node and the root \\
+\hline
+{\em global\-\_\-mat} & reference to the global adjacency matrix of the matrix graph in crs format \\
+\hline
+{\em local\-\_\-mat} & pointer to the local adjacency matrix of the matrix graph in crs format format \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classClusterAlg_a3ce04d40392ab7e8143de5ffcaea6dda}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!add\-Neighbor\-Element@{add\-Neighbor\-Element}}
+\index{add\-Neighbor\-Element@{add\-Neighbor\-Element}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{add\-Neighbor\-Element}]{\setlength{\rightskip}{0pt plus 5cm}void \-Cluster\-Alg\-::add\-Neighbor\-Element (
+\begin{DoxyParamCaption}
+\item[{\-Neighbor}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classClusterAlg_a3ce04d40392ab7e8143de5ffcaea6dda}
+\-Method adds \-Cluster or \-Separator to the boundary of the actual cluster. 
+
+\-References list\-\_\-boundary.
+
+\hypertarget{classClusterAlg_a3da066d722da219e5f64f624a6121b05}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!compute\-Neighbor@{compute\-Neighbor}}
+\index{compute\-Neighbor@{compute\-Neighbor}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{compute\-Neighbor}]{\setlength{\rightskip}{0pt plus 5cm}virtual void \-Cluster\-Alg\-::compute\-Neighbor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClusterAlg_a3da066d722da219e5f64f624a6121b05}
+\-Method traverses the \-Cluster\-Alg-\/tree and computes the boundary clusters of the actual cluster. 
+
+\-Implemented in \hyperlink{classcluster__alg_a78292c11a717fb5b83762fc4c070797f}{cluster\-\_\-alg}.
+
+\hypertarget{classClusterAlg_ad3a53cf9fb7af4e2a45e7d859bc87c7b}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!construct\-Graph@{construct\-Graph}}
+\index{construct\-Graph@{construct\-Graph}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{construct\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}\-M\-Graph$<${\bf \-Cluster\-Alg}$\ast$, unsigned$>$$\ast$ \-Cluster\-Alg\-::construct\-Graph (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Cluster\-Alg} $\ast$}]{t\-\_\-2, }
+\item[{unsigned}]{up = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}
+\label{classClusterAlg_ad3a53cf9fb7af4e2a45e7d859bc87c7b}
+
+
+\-Method computes an estimation of the distance between the cluster represented by this object and the cluster other based on graphs for the admissibility check. 
+
+\-In order to compute the estimation get\-Dist() sets up a graph and uses the algorithm of \-Dijkstra to compute the distance, whereas the graph is build by method \hyperlink{classClusterAlg_ad3a53cf9fb7af4e2a45e7d859bc87c7b}{construct\-Graph()}. 
+\begin{DoxyParams}{\-Parameters}
+{\em other} & cluster object to whom distance should be computed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+distance in the graph\-Method construct\-Graph constructs the graph \$\-G\-\_\-\-D\$. \-For this purpose two neighbored predecessors \$p\-\_\-0, p\-\_\-1  \-T\-\_\-\-I\$ are searched using \hyperlink{classClusterAlg_a108b12bb473f429c897e7ba004dd8b62}{find\-Roots()}. \-All clusters rooted at \$p\-\_\-0, p\-\_\-1\$ in the actual level are collected in a list by \hyperlink{classClusterAlg_ab4050fdfb42dc0ebec40c7464bbaf4ab}{get\-Nodes()}. \-These are the vertices of \$\-G\-\_\-\-D\$. \-Two vertices are neighbored iff the clusters are neighbored. \-The weight of an edge is difference between the actual level and the virtual level. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{\-Parameters}
+{\em other} & an other cluster for the block \$b = this  t\-\_\-2\$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a simple weighted graph 
+\end{DoxyReturn}
+\hypertarget{classClusterAlg_acbbefef10e2d91713a567af5bb5c08f7}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!create\-Cluster\-Tree@{create\-Cluster\-Tree}}
+\index{create\-Cluster\-Tree@{create\-Cluster\-Tree}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{create\-Cluster\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}virtual void \-Cluster\-Alg\-::create\-Cluster\-Tree (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{bmin, }
+\item[{unsigned $\ast$}]{op\-\_\-perm, }
+\item[{unsigned $\ast$}]{po\-\_\-perm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{classClusterAlg_acbbefef10e2d91713a567af5bb5c08f7}
+\-Method creates recursively the cluster tree, i.\-e. changes the permutation op\-\_\-perm and po\-\_\-perm and create child cluster trees. \-For this task only the adjacency matrix is used. 
+\begin{DoxyParams}{\-Parameters}
+{\em op\-\_\-perm} & permutation\-: permutated\-\_\-row = op\-\_\-perm\mbox{[}original\-\_\-row\mbox{]} \\
+\hline
+{\em po\-\_\-perm} & reverse permutation\-: original\-\_\-row = po\-\_\-perm\mbox{[}permutated\-\_\-idx\mbox{]} \\
+\hline
+{\em bmin} & threshold value for stopping further refinement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a cluster tree 
+\end{DoxyReturn}
+
+
+\-Implements \hyperlink{classcluster_a7eb7a1209c0030e5cf344252f704fd57}{cluster}.
+
+
+
+\-Reimplemented in \hyperlink{classcluster__alg_a2464aa83e8604d2098870c461f93b013}{cluster\-\_\-alg}.
+
+\hypertarget{classClusterAlg_a108b12bb473f429c897e7ba004dd8b62}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!find\-Roots@{find\-Roots}}
+\index{find\-Roots@{find\-Roots}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{find\-Roots}]{\setlength{\rightskip}{0pt plus 5cm}void \-Cluster\-Alg\-::find\-Roots (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Cluster\-Alg} $\ast$\&}]{p\-\_\-0, }
+\item[{{\bf \-Cluster\-Alg} $\ast$\&}]{p\-\_\-1}
+\end{DoxyParamCaption}
+) const}}
+\label{classClusterAlg_a108b12bb473f429c897e7ba004dd8b62}
+
+
+\-Method find\-Roots returns first neighbored pair of predecessors in the cluster tree. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \$p\-\_\-0\$} & input\-: the starting cluster, output\-: the predecessor neighbored with a predecessor of \$p\-\_\-1\$ \\
+\hline
+{\em \$p\-\_\-1\$} & input\-: the starting cluster, output\-: the predecessor neighbored with a predecessor of \$p\-\_\-0\$ \\
+\hline
+\end{DoxyParams}
+\hypertarget{classClusterAlg_ac21ad0586cca3b05c1df94fa66f224e4}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!get\-Depth@{get\-Depth}}
+\index{get\-Depth@{get\-Depth}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{get\-Depth}]{\setlength{\rightskip}{0pt plus 5cm}unsigned \-Cluster\-Alg\-::get\-Depth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classClusterAlg_ac21ad0586cca3b05c1df94fa66f224e4}
+\-The attribute depth takes the position of this cluster into the cluster-\/tree. \begin{DoxyReturn}{\-Returns}
+the value of depth 
+\end{DoxyReturn}
+
+
+\-References depth.
+
+\hypertarget{classClusterAlg_a468cf8819a9bae6a6b65db3ad6fb2d2d}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!get\-Neighbor@{get\-Neighbor}}
+\index{get\-Neighbor@{get\-Neighbor}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{get\-Neighbor}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::list$<$\-Neighbor$>$\& \-Cluster\-Alg\-::get\-Neighbor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classClusterAlg_a468cf8819a9bae6a6b65db3ad6fb2d2d}
+
+
+\-Method returns the list of \-Cluster\-Alg$\ast$ that are in the neighborhood of the actual \hyperlink{classClusterAlg}{\-Cluster\-Alg}. 
+
+\begin{DoxyReturn}{\-Returns}
+the boundary of the actual cluster 
+\end{DoxyReturn}
+
+
+\-References list\-\_\-boundary.
+
+\hypertarget{classClusterAlg_ab4050fdfb42dc0ebec40c7464bbaf4ab}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!get\-Nodes@{get\-Nodes}}
+\index{get\-Nodes@{get\-Nodes}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{get\-Nodes}]{\setlength{\rightskip}{0pt plus 5cm}void \-Cluster\-Alg\-::get\-Nodes (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{level, }
+\item[{std\-::list$<$ {\bf \-Cluster\-Alg} $\ast$ $>$ \&}]{nodes}
+\end{DoxyParamCaption}
+)}}
+\label{classClusterAlg_ab4050fdfb42dc0ebec40c7464bbaf4ab}
+
+
+\-Method traverses recursively the cluster-\/tree until a given level. \-If this level is achieved the pointer to this cluster is inserted into the list. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em nodes} & the list of pointers to the appropriate clusters (output) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classClusterAlg_a7b3c0f12a96e20016135ae5b98c100db}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!get\-Parent@{get\-Parent}}
+\index{get\-Parent@{get\-Parent}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{get\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cluster\-Alg}$\ast$ \-Cluster\-Alg\-::get\-Parent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{classClusterAlg_a7b3c0f12a96e20016135ae5b98c100db}
+
+
+\-Method returns the pointer to the parent cluster. 
+
+\begin{DoxyReturn}{\-Returns}
+parent cluster 
+\end{DoxyReturn}
+
+
+\-References parent.
+
+\hypertarget{classClusterAlg_a1010355ccb56db6bc68b258e94c4a765}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!has\-Neighbour@{has\-Neighbour}}
+\index{has\-Neighbour@{has\-Neighbour}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{has\-Neighbour}]{\setlength{\rightskip}{0pt plus 5cm}unsigned \-Cluster\-Alg\-::has\-Neighbour (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Cluster\-Alg} $\ast$const}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a1010355ccb56db6bc68b258e94c4a765}
+has\-Neighbour iterates through the boundary list searching for pointer to other 
+\begin{DoxyParams}{\-Parameters}
+{\em other} & the \hyperlink{classClusterAlg}{\-Cluster\-Alg} to check with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the size of neighbour 
+\end{DoxyReturn}
+\hypertarget{classClusterAlg_adce4fbafed2d9226336d3b57fae89692}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!is\-Neighbour@{is\-Neighbour}}
+\index{is\-Neighbour@{is\-Neighbour}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{is\-Neighbour}]{\setlength{\rightskip}{0pt plus 5cm}unsigned \-Cluster\-Alg\-::is\-Neighbour (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Cluster\-Alg} $\ast$const}]{other, }
+\item[{unsigned \&}]{nnodes0, }
+\item[{unsigned \&}]{nnodes1}
+\end{DoxyParamCaption}
+) const}}
+\label{classClusterAlg_adce4fbafed2d9226336d3b57fae89692}
+
+
+method checks if there exists edges in $(i, j) \in E(G(A))$ with $i$ in this cluster and $j$ in cluster other. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em input,\-:} & other \hyperlink{classClusterAlg}{\-Cluster\-Alg} object, in particular the represented index set \\
+\hline
+{\em nnodes0} & output\-: number of nodes in this cluster adjacent with any node into the other cluster \\
+\hline
+{\em nnodes1} & output\-: number of nodes in other cluster adjacent with any node into this cluster \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+the number of edges between the clusters 
+\end{DoxyReturn}
+\hypertarget{classClusterAlg_abe3332e66bad89111412fb0fa7928c66}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!is\-Separator@{is\-Separator}}
+\index{is\-Separator@{is\-Separator}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{is\-Separator}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool \-Cluster\-Alg\-::is\-Separator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClusterAlg_abe3332e66bad89111412fb0fa7928c66}
+\-Method returns the status of this \hyperlink{classClusterAlg}{\-Cluster\-Alg} object. 
+
+\-Implemented in \hyperlink{classcluster__alg_a20b9fac849beaf8b760e3bb15fae66e0}{cluster\-\_\-alg}.
+
+\hypertarget{classClusterAlg_ac7175d7df8045c8ad4363f709b5cc6cd}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!neighbors\-To\-Array@{neighbors\-To\-Array}}
+\index{neighbors\-To\-Array@{neighbors\-To\-Array}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{neighbors\-To\-Array}]{\setlength{\rightskip}{0pt plus 5cm}void \-Cluster\-Alg\-::neighbors\-To\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classClusterAlg_ac7175d7df8045c8ad4363f709b5cc6cd}
+transforms the list of neighbors into a sorted array of neighbors \hypertarget{classClusterAlg_ab2615e5ba68257b11d477274737a9c52}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!subdivide@{subdivide}}
+\index{subdivide@{subdivide}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{subdivide}]{\setlength{\rightskip}{0pt plus 5cm}virtual void \-Cluster\-Alg\-::subdivide (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{bmin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClusterAlg_ab2615e5ba68257b11d477274737a9c52}
+
+
+subdivide this cluster recursively, needed to generate the cluster tree 
+
+only for compatibility. empty implementation. 
+\begin{DoxyParams}{\-Parameters}
+{\em @param} & \\
+\hline
+{\em $\backslash$param} & bmin the minimal size of clusters (input) \\
+\hline
+\end{DoxyParams}
+
+
+\-Implemented in \hyperlink{classcluster__alg_a411de6be2059e0c2848c4b11f9a043cf}{cluster\-\_\-alg}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classClusterAlg_a25fe84e1434812f52a484e14dc191a01}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!\-\_\-l\-\_\-op\-\_\-perm@{\-\_\-l\-\_\-op\-\_\-perm}}
+\index{\-\_\-l\-\_\-op\-\_\-perm@{\-\_\-l\-\_\-op\-\_\-perm}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{\-\_\-l\-\_\-op\-\_\-perm}]{\setlength{\rightskip}{0pt plus 5cm}unsigned$\ast$ {\bf \-Cluster\-Alg\-::\-\_\-l\-\_\-op\-\_\-perm}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a25fe84e1434812f52a484e14dc191a01}
+local permutation\-: original $<$-\/ l\-\_\-op\-\_\-perm $<$-\/ permutation \hypertarget{classClusterAlg_ae5aac25ca0791e244b25574814b18825}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!\-\_\-l\-\_\-po\-\_\-perm@{\-\_\-l\-\_\-po\-\_\-perm}}
+\index{\-\_\-l\-\_\-po\-\_\-perm@{\-\_\-l\-\_\-po\-\_\-perm}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{\-\_\-l\-\_\-po\-\_\-perm}]{\setlength{\rightskip}{0pt plus 5cm}unsigned$\ast$ {\bf \-Cluster\-Alg\-::\-\_\-l\-\_\-po\-\_\-perm}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_ae5aac25ca0791e244b25574814b18825}
+local permutation\-: permutation $<$-\/ l\-\_\-po\-\_\-perm $<$-\/ original \hypertarget{classClusterAlg_aa7d43b82eac4084710cabafe6c9d8fee}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!\-\_\-local\-\_\-adj\-\_\-mat@{\-\_\-local\-\_\-adj\-\_\-mat}}
+\index{\-\_\-local\-\_\-adj\-\_\-mat@{\-\_\-local\-\_\-adj\-\_\-mat}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{\-\_\-local\-\_\-adj\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}\-Adj\-Mat$\ast$ {\bf \-Cluster\-Alg\-::\-\_\-local\-\_\-adj\-\_\-mat}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_aa7d43b82eac4084710cabafe6c9d8fee}
+local adjacency matrix \hypertarget{classClusterAlg_a29eb1ed447fe956fbece857e0ab898bc}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!adj\-\_\-mat@{adj\-\_\-mat}}
+\index{adj\-\_\-mat@{adj\-\_\-mat}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{adj\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}\-Adj\-Mat$\ast$ {\bf \-Cluster\-Alg\-::adj\-\_\-mat}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a29eb1ed447fe956fbece857e0ab898bc}
+\-The \-Adj\-Mat stores the edge set of the matrix graph \$\-G = (\-V,\-E)\$. (see class \-Adj\-Mat) \hypertarget{classClusterAlg_ac06ccb0ba85be10e97392bd063fa78c8}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!depth@{depth}}
+\index{depth@{depth}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{depth}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-Cluster\-Alg\-::depth}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_ac06ccb0ba85be10e97392bd063fa78c8}
+distance between the root node and this cluster 
+
+\-Referenced by get\-Depth().
+
+\hypertarget{classClusterAlg_a38f91e914760de5e80a8023e5bb644bf}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!diam@{diam}}
+\index{diam@{diam}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{diam}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-Cluster\-Alg\-::diam}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a38f91e914760de5e80a8023e5bb644bf}
+approximation for diameter of graph 
+
+\-Referenced by get\-Diam().
+
+\hypertarget{classClusterAlg_ace012e3a54a91c88fb486b7e02394d39}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!list\-\_\-boundary@{list\-\_\-boundary}}
+\index{list\-\_\-boundary@{list\-\_\-boundary}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{list\-\_\-boundary}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<$\-Neighbor$>$ {\bf \-Cluster\-Alg\-::list\-\_\-boundary}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_ace012e3a54a91c88fb486b7e02394d39}
+list of clusters that are in neighborhood 
+
+\-Referenced by add\-Neighbor\-Element(), and get\-Neighbor().
+
+\hypertarget{classClusterAlg_a09156a9cf7570cde252131f25e599fbb}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!neighbors@{neighbors}}
+\index{neighbors@{neighbors}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{neighbors}]{\setlength{\rightskip}{0pt plus 5cm}\-Neighbor$\ast$ {\bf \-Cluster\-Alg\-::neighbors}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a09156a9cf7570cde252131f25e599fbb}
+array of neighbors \hypertarget{classClusterAlg_af1b22f77639a805d28569806d561600e}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!nneighbors@{nneighbors}}
+\index{nneighbors@{nneighbors}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{nneighbors}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-Cluster\-Alg\-::nneighbors}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_af1b22f77639a805d28569806d561600e}
+number of neighbors \hypertarget{classClusterAlg_a4f06e1465978072d8c6bd098e062b701}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!op\-\_\-perm@{op\-\_\-perm}}
+\index{op\-\_\-perm@{op\-\_\-perm}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{op\-\_\-perm}]{\setlength{\rightskip}{0pt plus 5cm}unsigned$\ast$ {\bf \-Cluster\-Alg\-::op\-\_\-perm}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a4f06e1465978072d8c6bd098e062b701}
+global permutation\-: original $<$-\/ op\-\_\-perm $<$-\/ permutation \hypertarget{classClusterAlg_a1b63bc64e4622216b0539c4a5b76d3c2}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!parent@{parent}}
+\index{parent@{parent}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cluster\-Alg}$\ast$ {\bf \-Cluster\-Alg\-::parent}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_a1b63bc64e4622216b0539c4a5b76d3c2}
+pointer to parent 
+
+\-Referenced by get\-Parent().
+
+\hypertarget{classClusterAlg_af3d1d7c4ae0516ff9de725d3ff760b07}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!po\-\_\-perm@{po\-\_\-perm}}
+\index{po\-\_\-perm@{po\-\_\-perm}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{po\-\_\-perm}]{\setlength{\rightskip}{0pt plus 5cm}unsigned$\ast$ {\bf \-Cluster\-Alg\-::po\-\_\-perm}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_af3d1d7c4ae0516ff9de725d3ff760b07}
+global permutation\-: permutation $<$-\/ po\-\_\-perm $<$-\/ original \hypertarget{classClusterAlg_ac1034ff983ce968e11edaf18c2b15cb2}{
+\index{\-Cluster\-Alg@{\-Cluster\-Alg}!vdepth@{vdepth}}
+\index{vdepth@{vdepth}!ClusterAlg@{\-Cluster\-Alg}}
+\subsubsection[{vdepth}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-Cluster\-Alg\-::vdepth}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classClusterAlg_ac1034ff983ce968e11edaf18c2b15cb2}
+level since the index set is persistent 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ClusterAlg_8h}{\-Cluster\-Alg.\-h}\end{DoxyCompactItemize}

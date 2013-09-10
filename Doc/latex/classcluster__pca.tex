@@ -1,0 +1,78 @@
+\hypertarget{classcluster__pca}{
+\section{cluster\-\_\-pca$<$ \-T $>$ \-Class \-Template \-Reference}
+\label{classcluster__pca}\index{cluster\-\_\-pca$<$ T $>$@{cluster\-\_\-pca$<$ T $>$}}
+}
+
+
+\-A class for storing clusters of degrees of freedom. \-Subdivision is based on the principal component analysis (\-P\-C\-A)  
+
+
+
+
+{\ttfamily \#include $<$cluster\-\_\-pca.\-h$>$}
+
+\-Inheritance diagram for cluster\-\_\-pca$<$ \-T $>$\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classcluster__pca}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}{isadm} (double eta2, \hyperlink{classcluster}{cluster} $\ast$cl, bl\-\_\-info \&info)
+\item 
+virtual void \hyperlink{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}{create\-Cluster\-Tree} (const unsigned bmin, unsigned $\ast$op\-\_\-perm, unsigned $\ast$po\-\_\-perm)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\subsubsection*{template$<$class \-T$>$class cluster\-\_\-pca$<$ T $>$}
+
+\-A class for storing clusters of degrees of freedom. \-Subdivision is based on the principal component analysis (\-P\-C\-A) 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}{
+\index{cluster\-\_\-pca@{cluster\-\_\-pca}!create\-Cluster\-Tree@{create\-Cluster\-Tree}}
+\index{create\-Cluster\-Tree@{create\-Cluster\-Tree}!cluster_pca@{cluster\-\_\-pca}}
+\subsubsection[{create\-Cluster\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class \-T$>$ virtual void {\bf cluster\-\_\-pca}$<$ \-T $>$\-::create\-Cluster\-Tree (
+\begin{DoxyParamCaption}
+\item[{const unsigned}]{bmin, }
+\item[{unsigned $\ast$}]{op\-\_\-perm, }
+\item[{unsigned $\ast$}]{po\-\_\-perm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{classcluster__pca_a269105a7c9520bdcc566a858fbf6b763}
+creates recursively the cluster tree, i.\-e. changes the permutation op\-\_\-perm and po\-\_\-perm and create child cluster trees 
+\begin{DoxyParams}{\-Parameters}
+{\em op\-\_\-perm} & permutation\-: permutated\-\_\-row = op\-\_\-perm\mbox{[}original\-\_\-row\mbox{]} \\
+\hline
+{\em po\-\_\-perm} & reverse permutation\-: original\-\_\-row = po\-\_\-perm\mbox{[}permutated\-\_\-idx\mbox{]} \\
+\hline
+{\em bmin} & threshold value for stopping further refinement \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements \hyperlink{classcluster_a7eb7a1209c0030e5cf344252f704fd57}{cluster}.
+
+\hypertarget{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}{
+\index{cluster\-\_\-pca@{cluster\-\_\-pca}!isadm@{isadm}}
+\index{isadm@{isadm}!cluster_pca@{cluster\-\_\-pca}}
+\subsubsection[{isadm}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class \-T$>$ bool {\bf cluster\-\_\-pca}$<$ \-T $>$\-::isadm (
+\begin{DoxyParamCaption}
+\item[{double}]{eta2, }
+\item[{{\bf cluster} $\ast$}]{cl, }
+\item[{bl\-\_\-info \&}]{info}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{classcluster__pca_a4546575a6d4e83e4d8ab6131019fae95}
+is this cluster admissible with the cluster cl ? bool\& only valid for cluster\-Sp\-N\-D 
+
+\-Implements \hyperlink{classcluster_aa48a0f4aada61485263d76b82e819b4b}{cluster}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cluster__pca_8h}{cluster\-\_\-pca.\-h}\end{DoxyCompactItemize}

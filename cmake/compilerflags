@@ -1,0 +1,555 @@
+#!/usr/bin/env perl
+#
+# CompilerFlags returns the platform and architecture dependent
+# flags (with and without optimisation) for different compilers
+# and processors by autodetecting the current CPU.
+# 
+#   supported platforms : Linux, Darwin
+
+use Getopt::Long;
+
+################################################################################
+# default settings
+
+$compiler    = "cc";
+$info        = "0";
+$show_oflags = "0";
+$bits        = 64;
+
+$system      = "";
+$cpu         = "";
+$compversion = "";
+$cflags      = "";
+$oflags      = "";
+
+################################################################################
+# print error message
+
+sub error 
+{
+    print(stderr "$_[0].\n");
+}
+
+################################################################################
+# show usage info
+
+sub usage
+{
+    print "Usage: CompilerFlags [options]\n";
+    print "Options:\n";
+    print "    --comp <name>      set compiler to use (default: cc)\n";
+    print "    --info             detect system and CPU (default off)\n";
+    print "    --[no]opt          print optimisation flags (default off)\n";
+    print "    -32|-64            set bitsize (default: max. available)\n";
+    print "    -h, --help         print this message\n\n";
+    print "Supported systems and compilers:\n";
+    print "    Linux   : gcc-4.x, icc-10, icc-11, icc-12\n";
+    print "    Darwin  : gcc-4.x, icc-10, icc-11, icc-12\n\n";
+    print "Supported CPUs:\n";
+    print "    Linux   : pentium, pentium-mmx, pentium-pro,\n";
+    print "              p2, p3, p3-sse, p3-xeon, centrino, p4, p4-(w|p|n|f)\n";
+    print "              penryn, nehalem, westmere\n";
+    print "              athlon, athlon-tbird, athlon-xp,\n";
+    print "              opteron, via-c3a\n";
+    print "    Darwin  : penryn\n\n";
+    exit 0;
+}
+
+################################################################################
+# parse command line
+
+sub parse_cmdline
+{
+    my $help, $bit32, $bit64;
+    my %options = ('comp=s'      => \$compiler,
+		   'info'        => \$info,
+		   'opt!'        => \$show_oflags,
+		   'h|help'      => \$help,
+		   '32'          => \$bit32,
+		   '64'          => \$bit64);
+
+    Getopt::Long::Configure("no_ignore_case", "pass_through", "no_auto_abbrev");
+    GetOptions(%options) || usage;
+
+    usage if $help;
+    $bits = 32 if ($bit32);
+    $bits = 64 if ($bit64);
+}
+
+################################################################################
+# set compiler flags
+
+sub get_cflags 
+{
+    my $cflags   = "undef";
+
+    if ($system =~ /Linux/) {
+        
+	if ($compversion =~ /gcc-4.[01234]/) {
+            for ( $cpu ) {
+                if    (/pentium-mmx/)   { $cflags = "-march=pentium-mmx"; }
+                elsif (/pentiumpro/)    { $cflags = "-march=i686"; }
+                elsif (/p2/)            { $cflags = "-march=pentium2"; }
+                elsif (/p3-(sse|xeon)/) { $cflags = "-march=pentium3 -mfpmath=sse"; }
+                elsif (/p3/)            { $cflags = "-march=pentium3"; }
+                elsif (/pentium-m/)     { $cflags = "-march=pentium-m -msse2 -mfpmath=sse"; }
+                elsif (/p4$/)           { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-willamette/) { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-northwood/)  { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-prescott/)   { $cflags = "-march=prescott -msse3 -mfpmath=sse"; }
+                elsif (/p4-nocona/)     { $cflags = "-march=nocona -m$bits -msse3 -mfpmath=sse"; }
+                elsif (/p4-foster/)     { $cflags = "-march=nocona -msse3 -mfpmath=sse"; }
+                elsif (/core/)          { $cflags = "-march=nocona -msse3 -m$bits -mfpmath=sse"; }
+                elsif (/core2/)         { $cflags = "-march=core2 -m$bits -mfpmath=sse"; }
+                elsif (/penryn|nehalem/)  { $cflags = "-march=core2 -m$bits -mfpmath=sse"; }
+		elsif (/westmere/)      { $cflags = "-march=core2 -m$bits -mfpmath=sse"; }
+                elsif (/athlon-tbird/)  { $cflags = "-march=athlon-tbird"; }
+                elsif (/athlon-xp/)     { $cflags = "-march=athlon-xp -msse -mfpmath=sse,387"; }
+                elsif (/athlon/)        { $cflags = "-march=athlon"; }
+                elsif (/opteron/)       { $cflags = "-march=opteron -m$bits -mfpmath=sse,387"; }
+                elsif (/via-c3a/)       { $cflags = "-march=c3 -msse -mfpmath=sse"; }
+                elsif (/itanium2/)      { $cflags = " "; }
+            }
+        }
+	elsif ($compversion =~ /gcc-4.[67]/) {
+            for ( $cpu ) {
+                if    (/pentium-mmx/)   { $cflags = "-march=pentium-mmx"; }
+                elsif (/pentiumpro/)    { $cflags = "-march=i686"; }
+                elsif (/p2/)            { $cflags = "-march=pentium2"; }
+                elsif (/p3-(sse|xeon)/) { $cflags = "-march=pentium3 -mfpmath=sse";  }
+                elsif (/p3/)            { $cflags = "-march=pentium3";  }
+                elsif (/pentium-m/)     { $cflags = "-march=pentium-m -msse2 -mfpmath=sse"; }
+                elsif (/p4$/)           { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-willamette/) { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-northwood/)  { $cflags = "-march=pentium4 -msse2 -mfpmath=sse"; }
+                elsif (/p4-prescott/)   { $cflags = "-march=prescott -msse3 -mfpmath=sse"; }
+                elsif (/p4-nocona/)     { $cflags = "-march=nocona -m$bits -msse3 -mfpmath=sse"; }
+                elsif (/p4-foster/)     { $cflags = "-march=nocona -msse3 -mfpmath=sse"; }
+                elsif (/core/)          { $cflags = "-march=nocona -msse3 -m$bits -mfpmath=sse"; }
+                elsif (/core2/)         { $cflags = "-march=core2 -m$bits -mfpmath=sse"; }
+                elsif (/penryn/)  { $cflags = "-march=core2 -m$bits -mfpmath=sse -msse4.1"; }
+		elsif (/nehalem/)  { $cflags = "-march=core2 -m$bits -mfpmath=sse -msse4.1 -msse4.2"; }
+		elsif (/westmere/)       { $cflags = "-march=corei7 -m$bits -mfpmath=sse -msse4.1 -msse4.2"; }
+                elsif (/athlon-tbird/)  { $cflags = "-march=athlon-tbird"; }
+                elsif (/athlon-xp/)     { $cflags = "-march=athlon-xp -msse -mfpmath=sse,387"; }
+                elsif (/athlon/)        { $cflags = "-march=athlon"; }
+                elsif (/opteron/)       { $cflags = "-march=opteron -m$bits -mfpmath=sse,387"; }
+                elsif (/via-c3a/)       { $cflags = "-march=c3 -msse -mfpmath=sse"; }
+                elsif (/itanium2/)      { $cflags = " "; }
+            }
+        }
+        elsif ($compversion =~ /icc-10/) {
+            for ($cpu) {
+                if    (/pentium-m/)     { $cflags = "-xW"; }
+                elsif (/pentium/)       { $cflags = ""; }
+                elsif (/pentiumpro/)    { $cflags = ""; }
+                elsif (/p2/)            { $cflags = ""; }
+                elsif (/p3-(sse|xeon)/) { $cflags = "-march=pentiumiii -xK"; }
+                elsif (/p3/)            { $cflags = "-march=pentiumii"; }
+                elsif (/p4$/)           { $cflags = "-xW"; }
+                elsif (/p4-willamette/) { $cflags = "-xW"; }
+                elsif (/p4-northwood/)  { $cflags = "-xN"; }
+                elsif (/p4-prescott/)   { $cflags = "-xP"; }
+                elsif (/p4-nocona/)     { $cflags = "-xP"; }
+                elsif (/p4-foster/)     { $cflags = "-xP"; }
+                elsif (/nehalem|penryn/) { $cflags = "-xS"; }
+                elsif (/core2/)         { $cflags = "-xT"; }
+                elsif (/core/)          { $cflags = "-xP"; }
+                elsif (/athlon-xp/)     { $cflags = "-xK"; }
+                elsif (/athlon/)        { $cflags = "-march=pentiumii"; }
+                elsif (/opteron/)       { $cflags = "-xW"; }
+                elsif (/via-c3a/)       { $cflags = "-xK"; }
+                elsif (/itanium2/)      { $cflags = ""; }
+            }
+        }
+        elsif ($compversion =~ /icc-1[12]/) {
+	    $cflags = "-xHOST"
+        }
+        else {
+            error("Compiler \"$compversion\" not supported on Linux");
+        }
+    }
+    elsif ($system eq "Darwin")
+    {
+        if ($compversion =~ /gcc-4.[01]/)
+        {
+            for ($cpu) {
+                if (/penryn/)  {
+		    $cflags = "-march=core2 -m$bits -mfpmath=sse";
+		}
+            }
+        }
+        elsif ($compversion =~ /gcc-4./) {
+            for ($cpu) {
+	        if (/sandy-bridge/)  {
+		    $cflags = "-march=core2 -msse4.2 -m$bits -mfpmath=sse";
+	        }
+                elsif (/penryn/)  {
+		    $cflags = "-march=core2 -msse4.1 -m$bits -mfpmath=sse";
+		}
+                elsif ( /core2/ ) {
+                    $cflags = "-march=core2 -m$bits -mfpmath=sse";
+                }
+            }
+        }
+        elsif ($compversion =~ /icc-10/) {
+            for ($cpu) {
+                if ( /penryn|nehalem/ )   { $cflags = "-xS -m$bits"; }
+                elsif ( /core|core2/ )    { $cflags = "-xT -m$bits"; }
+            }
+	}
+        elsif ($compversion =~ /icc-1[12]/) {
+	    $cflags = "-xHOST"
+        }
+        else  {
+            error("Compiler \"$compversion\" not supported on Darwin");
+        }
+    }
+
+    if ($cflags eq "undef") {
+        error("CPU \"$cpu\" not supported by compiler \"$compversion\" on $system");
+        $cflags = ""; 
+    }
+
+    return $cflags;
+}
+
+################################################################################
+# set optimization flags
+ 
+sub get_oflags 
+{
+    my $oflags   = "undef";
+
+    if ($system =~ /Linux/) {
+        for ($compversion) {
+            if (/gcc-4/) { 
+                $oflags = "-O3 -fomit-frame-pointer -ffast-math -funroll-loops";
+                
+                if    ($cpu =~ /pentium($|-mmx)/) {
+		    $oflags .= " -malign-double";
+		}
+                elsif ($cpu =~ /p2|via-c3/) {
+		    $oflags .= " -malign-double";
+		}
+                elsif ($cpu =~ /pentium-m|core|core2|corei7/) 
+                {
+                    if    ($bits == 32) {
+			$oflags .= " -malign-double -fprefetch-loop-arrays -ftree-vectorize";
+		    }
+                    elsif ($bits == 64) {
+			$oflags .= " -fprefetch-loop-arrays -ftree-vectorize";
+		    }
+                }
+                elsif ($cpu =~ /p[34]|athlon/) {
+                    $oflags .= " -malign-double -fprefetch-loop-arrays -ftree-vectorize"; 
+                }
+                elsif ($cpu =~ /opteron/) {
+                    if    ($bits == 32) {
+			$oflags .= " -malign-double -fprefetch-loop-arrays -ftree-vectorize";
+		    }
+                    elsif ($bits == 64) {
+			$oflags .= " -fprefetch-loop-arrays -ftree-vectorize";
+		    }
+                }
+            }
+            elsif (/icc-1[012]/) {
+                $oflags = "-O3 -unroll -ip";
+                if ($cpu =~ /itanium2/) { $oflags .= " -IFP_fma"; }
+            }
+        }
+    }
+    elsif ($system =~ /Darwin/) {
+        for ($compversion) {
+            if (/gcc-4/) { 
+                $oflags = "-O3 -fomit-frame-pointer -ffast-math";
+            }
+            elsif (/icc-1[012]/) {
+                $oflags = "-O3 -unroll -ip";
+            }
+        }
+    }
+
+    if ($oflags eq "undef") {
+        error("CPU \"$cpu\" not supported by compiler \"$compverision\" on $system");
+        $oflags = "-O";
+    }
+
+    return $oflags;
+}
+
+################################################################################
+# find out processor name
+
+sub lookup_x86
+{
+    my @cpudata = $_[0];
+
+    my $vendor = $cpudata{vendor};
+    my $family = $cpudata{family};
+    my $model  = $cpudata{model};
+
+    if ($vendor eq "AuthenticAMD") {
+        if ($family eq "6") {
+            # Athlon
+            if    ($model eq "1") { return "athlon"; }
+            elsif ($model eq "2") { return "athlon"; }
+            elsif ($model eq "3") { return "athlon"; }  # Duron
+            elsif ($model eq "4") { return "athlon-tbird"; }
+            elsif ($model eq "6") { return "athlon-xp"; }
+            elsif ($model eq "7") { return "athlon-xp"; } # Duron-XP
+            elsif ($model eq "10") { return "athlon-xp"; }
+            else  { error("Unknown AMD Athlon model \"$model\""); 
+                    return "athlon-tbird"; }
+        }
+        elsif ($family eq "15") {
+            # AMD Opteron
+            if    ($model eq "4") { return "opteron"; }
+	    elsif ($model eq "5") { return "opteron"; }
+            elsif ($model eq "33") { return "opteron"; }
+            elsif ($model eq "37") { return "opteron"; }
+            elsif ($model eq "65") { return "opteron"; }
+            else  { error("Unknown AMD Opteron model \"$model\""); 
+                    return "opteron"; }
+        }
+    }
+    elsif ( $vendor eq "GenuineIntel" )
+    {
+        if ($family eq "5") {
+            # Pentium
+            if    ($model eq "0") { return "pentium"; }
+            elsif ($model eq "1") { return "pentium"; }
+            elsif ($model eq "2") { return "pentium"; }
+            elsif ($model eq "3") { return "pentium"; }
+            elsif ($model eq "4") { return "pentium-mmx"; }
+            elsif ($model eq "7") { return "pentium"; }
+            elsif ($model eq "8") { return "pentium-mmx"; }
+            else  { error("Unknown Intel Pentium model \"$model\""); 
+                    return "pentium"; }
+        }
+        elsif ($family eq "6") {
+            # PentiumPro, P2, P3
+            if    ($model eq "0") { return "pentiumpro"; }
+            elsif ($model eq "1") { return "pentiumpro"; }
+            elsif ($model eq "3") { return "p2"; }
+            elsif ($model eq "5") { return "p2"; }
+            elsif ($model eq "6") { return "p2"; }
+            elsif ($model eq "7") { return "p3"; }
+            elsif ($model eq "8") { return "p3-sse"; }
+            elsif ($model eq "9") { return "pentium-m"; }   # Banias
+            elsif ($model eq "10") { return "p3-xeon"; }
+            elsif ($model eq "11") { return "p3-sse"; }
+            elsif ($model eq "13") { return "pentium-m"; }   # Dothan
+            elsif ($model eq "14") { return "core"; }        # Yonah
+            elsif ($model eq "15") { return "core2"; }
+            elsif ($model eq "23") { return "penryn"; }   # Harpertown
+            elsif ($model eq "26") { return "nehalem"; }
+            elsif ($model eq "30") { return "nehalem"; }  # Lynnfield
+	    elsif ($model eq "44") { return "westmere"; } 
+            else  { error("Unknown Intel Pentium model \"$model\"");
+                    return "pentiumpro"; }
+        }
+        elsif ($family eq "15") {
+            # Pentium 4
+            if    ($model eq "0") { return "p4"; }
+            elsif ($model eq "1") { return "p4-willamette"; }  # Willamette
+            elsif ($model eq "2") { return "p4-northwood";  }  # Northwood
+            elsif ($model eq "3") { return "p4-prescott";   }  # Prescott
+            elsif ($model eq "4") { return "p4-nocona";     }  # Nocona
+            elsif ($model eq "5") { return "p4-foster";     }  # Foster
+            else  { error("Unknown Intel Pentium4 model \"$model\"");
+		    return "p4"; }
+        }
+        elsif ($family eq "Itanium 2") {
+            return "itanium2";
+        }
+    }
+    elsif ($vendor eq "CentaurHauls") {
+        if ($family eq "6") {
+            # VIA C3
+            if ($model eq "9") { return "via-c3a"; }
+            else { error("Unknown Via C3 model \"$model\""); 
+                   return "via-c3"; }
+        }
+    }
+    else {
+        error("Unknown cpu-vendor \"$vendor\"");
+        return "i386";
+    }
+
+    return $cpu;
+}
+
+################################################################################
+# detect cpu on a Linux box
+
+sub parse_linux
+{
+    my @cpuinfo = `cat /proc/cpuinfo 2>&1`;
+    my @cpudata = ();
+
+    foreach $line (@cpuinfo) {
+
+        my $entry, $data;
+       
+        $entry = $line;
+        $entry =~ s/[ \t]*\:.*//g;
+        $entry =~ s/\n//g;
+
+        $data  = $line;
+        $data  =~ s/.*\: *//g;
+        $data  =~ s/\n//g;
+
+        if    ($entry =~ /vendor/) { $cpudata{vendor} = $data; }
+        elsif ($entry eq "cpu")    { $cpudata{type}   = $data; }
+        elsif ($entry =~ /family/) { $cpudata{family} = $data; }
+        elsif ($entry eq "model")  { $cpudata{model}  = $data; }
+    }
+
+    # switch between different outputs
+
+    if ($cpudata{vendor} ne "") {
+	return lookup_x86(@cpudata);
+    }
+    elsif ($cpudata{type} ne "") {
+	error("Unknown CPU \"$cpudata{type}\"");
+    }
+    else {
+        error("Unsupported structure in /proc/cpuinfo");
+    }
+
+    return "";
+}
+
+################################################################################
+# detect cpu on a Mac
+
+sub parse_darwin
+{
+    # parse CPU type
+
+    my $cputype    = "";
+    my $cpusubtype = "";
+    my $sse41      = "";
+    my @cfg        = `sysctl -a hw`;
+
+    foreach $line (@cfg) {
+
+        if ($line =~ /cputype/i) {
+            $cputype = $line;
+            $cputype =~ s/.*\: *//g;
+            $cputype =~ s/\n//g;
+        } 
+        elsif ($line =~ /cpusubtype/i)
+        {
+            $cpusubtype = $line;
+            $cpusubtype =~ s/.*\: *//g;
+            $cpusubtype =~ s/\n//g;
+        }
+        elsif ($line =~ /avx/i)
+        {
+            $avx = $line;
+            $avx =~ s/.*\: *//g;
+            $avx =~ s/\n//g;
+        } 
+        elsif ($line =~ /sse4_1/i)
+        {
+            $sse41 = $line;
+            $sse41 =~ s/.*\: *//g;
+            $sse41 =~ s/\n//g;
+        } 
+    }
+
+    # set processor name
+
+    if ($cputype == 7) {
+	
+        if ($cpusubtype == 4) { 
+	    if ($avx == 1) {
+	      return "sandy-bridge";
+	    }
+            elsif ($sse41 == 1) {
+              return "penryn"; 
+            }
+            else {
+	      return "core2";
+            }
+        }
+        else {
+            error("Unsupported processor type \"$cputype/$cpusubtype\""); 
+        }
+    }
+    else {
+        error("Unsupported processor type \"$cputype\""); 
+    }
+
+    return "";
+}
+
+################################################################################
+# detect compiler version
+
+sub get_comp_version
+{
+    my @options  = ( "-v", "--version", "-V");
+
+    foreach $opt (@options)
+    {
+        my @output = `$compiler $opt 2>&1`;
+
+        foreach $line (@output)
+        {
+            if    ($line =~ /^gcc version (\d+)\.(\d+)/i) {
+		return "gcc-$1.$2";
+	    }
+            elsif ($line =~ /intel.*compiler.*version.* (\d+)\.(\d+)/i) {
+		return "icc-$1.$2";
+	    }
+            elsif ($line =~ /Version (\d+)\.(\d+).*l_cc/) {
+		return "icc-$1.$2";
+	    }
+        }
+    }
+
+    return "";
+}
+
+################################################################################
+# main program
+
+parse_cmdline();
+
+# determine operating system
+$system = `uname -s`;
+$system =~ s/\n//g;
+
+# detect compiler version
+$compversion = get_comp_version();
+
+if ($compversion eq "")
+{
+    error("Compiler \"$compiler\" not available or unsupported");
+    exit(1);
+}
+
+# detect processor
+if    ($system =~ /Linux/)   { $cpu = parse_linux(); }
+elsif ($system eq "Darwin")  { $cpu = parse_darwin(); }
+else  { error("Unknown system \"$system\""); exit(1); }
+
+# setup cflags
+$cflags = get_cflags(); 
+if ($show_oflags == 1) { $oflags = get_oflags(); }
+
+# output
+if ($info == 1) {
+    print "CPU $cpu, $bits bit\n";
+    print "System $system\n";
+    print "Compiler $compversion, flags \"$cflags\"\n";
+    if ($show_oflags == 1) { print "Optimization flags \"$oflags\"\n"; }
+}
+else {
+    print "$oflags " if ($show_oflags == 1);
+    print "$cflags";
+    print "\n" if (($cflags ne "") or ($oflags ne ""));
+}
